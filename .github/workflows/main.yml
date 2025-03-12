@@ -30,4 +30,13 @@ jobs:
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push github-contribution-grid-snake.svg to the output branch
+        run: |
+          git config --global user.name "KevinS4160"
+          git config --global user.email "kevinajero10@gmail.com"
+          git checkout -b output
+          git add dist/
+          git commit -m "Update github-contribution-grid-snake.svg"
+          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git output
